@@ -1,0 +1,25 @@
+#!/bin/bash
+
+python << END
+import sys
+import time
+from os import environ
+import psycopg2
+
+while True:
+    try:
+        psycopg2.connect(
+            dbname=environ.get("POSTGRES_DB"),
+            user=environ.get("POSTGRES_USER"),
+            password=environ.get("POSTGRES_PASSWORD"),
+            host=environ.get("POSTGRES_HOST")
+        )
+        break
+    except psycopg2.OperationalError as error:
+        sys.stderr.write("PostgreSQL not yet available...\n")
+
+    time.sleep(1)
+END
+>&2 echo 'PostgreSQL is available'
+
+exec "$@"

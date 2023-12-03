@@ -1,0 +1,12 @@
+alembic
+asyncpg==0.28.0
+async-sqlalchemy
+asyncio
+fastapi==0.104.0
+fastapi-filter[sqlalchemy]
+psycopg2-binary
+pydantic
+pydantic_settings
+python-dotenv
+sqlalchemy==2.0.22
+uvicorn[standard]
