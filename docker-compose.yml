@@ -5,28 +5,13 @@ services:
     build:
       context: .
       dockerfile: ./compose/Dockerfile
+    image: messenger_api
     container_name: MessengerAPI
     ports:
-      - "8080:8080"
+      - 8080:8080
     restart: always
     volumes:
-      - "./messenger:/messenger"
+      - "./:/app"
     env_file:
       - ./messenger/.env
-    command: uvicorn messenger.server:app --reload --host 0.0.0.0 --port 8080
-    depends_on:
-      - db
-
-  db:
-    image: postgres:16-alpine
-    container_name: MessengerDB
-    ports:
-      - "5432:5432"
-    restart: always
-    volumes:
-      - postgresql_data:/var/lib/postgresql/data
-    env_file:
-      - ./messenger/.env
-
-volumes:
-  postgresql_data:
+    command: python main.py

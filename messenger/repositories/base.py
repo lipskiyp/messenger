@@ -40,8 +40,6 @@ class BaseRepo(Generic[ModelType]):
         query = filters.filter(select(self.model))
         db_obj = await self.session.scalars(query)
         res = db_obj.all()
-        if not res:
-            raise NotFoundException
         return res
 
 

@@ -10,11 +10,14 @@ from messenger.models import Base
 
 engine = create_async_engine(
     settings.get_db_url(),
-    echo=True,
+    #echo=True,
 )
 
 
 async def init_db():
+    """
+    Initiate database (NB will drop current tables).
+    """
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)

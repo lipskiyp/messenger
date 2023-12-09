@@ -23,6 +23,7 @@ router = APIRouter()
 @router.post(
     "/",
     status_code=status.HTTP_201_CREATED,
+    tags=["users"]
 )
 async def create_user(
     request: UserCreateSchema,
@@ -34,7 +35,10 @@ async def create_user(
     return await controller.create(request=request)
 
 
-@router.get("/")
+@router.get(
+    "/",
+    tags=["users"]
+)
 async def list_users(
     controller: UserController = Depends(ControllerFactory().get_user_controller),
     filters: UserFilter = FilterDepends(UserFilter),
@@ -45,7 +49,10 @@ async def list_users(
     return await controller.list(filters=filters)
 
 
-@router.get("/{id}")
+@router.get(
+    "/{id}",
+    tags=["users"]
+)
 async def get_user(
     id: UUID,
     controller: UserController = Depends(ControllerFactory().get_user_controller),
@@ -59,6 +66,7 @@ async def get_user(
 @router.patch(
     "/{id}",
     status_code=status.HTTP_201_CREATED,
+    tags=["users"]
 )
 async def update_user(
     id: UUID,
@@ -74,6 +82,7 @@ async def update_user(
 @router.delete(
     "/{id}",
     status_code=status.HTTP_204_NO_CONTENT,
+    tags=["users"]
 )
 async def delete_user(
     id: UUID,

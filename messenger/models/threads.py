@@ -23,7 +23,7 @@ class Thread(CommonBase):
         nullable=False,
     )
     user1: Mapped["User"] = relationship(
-        backref="thread1",
+        backref="threads",
         foreign_keys=[user1_id],
         init=False,
     )
@@ -35,7 +35,7 @@ class Thread(CommonBase):
         nullable=False,
     )
     user2: Mapped["User"] = relationship(
-        backref="thread2",
+        #backref="threads",
         foreign_keys=[user2_id],
         init=False,
     )

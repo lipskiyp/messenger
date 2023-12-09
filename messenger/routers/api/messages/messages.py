@@ -23,6 +23,7 @@ router = APIRouter()
 @router.post(
     "/",
     status_code=status.HTTP_201_CREATED,
+    tags=["messages"]
 )
 async def create_message(
     request: MessagesCreateSchema,
@@ -33,7 +34,10 @@ async def create_message(
     """
     return await controller.create(request=request)
 
-@router.get("/")
+@router.get(
+    "/",
+    tags=["messages"]
+)
 async def list_messages(
     controller: MessageController = Depends(ControllerFactory().get_message_controller),
     filters: MessageFilter = FilterDepends(MessageFilter),
@@ -44,7 +48,10 @@ async def list_messages(
     return await controller.list(filters=filters)
 
 
-@router.get("/{id}")
+@router.get(
+    "/{id}",
+    tags=["messages"]
+)
 async def get_message(
     id: UUID,
     controller: MessageController = Depends(ControllerFactory().get_message_controller),
@@ -58,6 +65,7 @@ async def get_message(
 @router.patch(
     "/{id}",
     status_code=status.HTTP_201_CREATED,
+    tags=["messages"]
 )
 async def update_message(
     id: UUID,
@@ -73,6 +81,7 @@ async def update_message(
 @router.delete(
     "/{id}",
     status_code=status.HTTP_204_NO_CONTENT,
+    tags=["messages"]
 )
 async def delete_message(
     id: UUID,

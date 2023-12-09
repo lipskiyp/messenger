@@ -11,6 +11,7 @@ from messenger.exceptions import (
     IntegrityErrorException,
     base_exception_handler
 )
+from messenger.metadata import tags_metadata
 
 
 class MessengerApp:
@@ -18,7 +19,7 @@ class MessengerApp:
     FastAPI app.
     """
     def create_app(self) -> FastAPI:
-        app = FastAPI()
+        app = FastAPI(openapi_tags=tags_metadata)
         self.init_routers(app)
         self.init_exception_handlers(app)
         return app
@@ -27,7 +28,6 @@ class MessengerApp:
         app.include_router(
             api_router,
             prefix="/api",
-            tags=["api"],
         )
 
     def init_exception_handlers(self, app: FastAPI) -> None:
@@ -44,7 +44,7 @@ class MessengerApp:
 app = MessengerApp().create_app()
 
 
-#@app.on_event("startup")
+@app.on_event("startup")
 async def on_startup():
     await init_db()
 

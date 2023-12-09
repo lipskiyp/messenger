@@ -15,8 +15,8 @@ class Settings(BaseSettings):
 
     POSTGRES_DB: str = environ.get("POSTGRES_DB", "postgres")
     POSTGRES_USER: str = environ.get("POSTGRES_USER", "postgres")
-    POSTGRES_PASSWORD: str = environ.get("POSTGRES_PASSWORD", "pswrd")
-    POSTGRES_HOST: str = environ.get("POSTGRES_HOST", "db")
+    POSTGRES_PASSWORD: str = environ.get("POSTGRES_PASSWORD", "")
+    POSTGRES_HOST: str = environ.get("POSTGRES_HOST", "host.docker.internal")
     POSTGRES_PORT: int = int(environ.get("POSTGRES_PORT", 5432))
 
     class Config:
@@ -26,7 +26,6 @@ class Settings(BaseSettings):
         """
         Get PostgreSQL url.
         """
-        print(f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}")
         return f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
 
 
