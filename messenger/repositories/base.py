@@ -10,7 +10,6 @@ from typing import Type, TypeVar, Generic, List
 from uuid import UUID
 
 from messenger.models import Base
-from messenger.database import get_session
 from messenger.exceptions import IntegrityErrorException, NotFoundException
 
 
